@@ -16,7 +16,6 @@ void UdpSocketDataProvider::onReceiveData( ) {
         datagram.resize( _server.pendingDatagramSize( ) );
         QHostAddress address;
         _server.readDatagram( datagram.data( ), datagram.size( ), &address );
-        qDebug( ) << "getData:" << datagram.count( );
         emit this->getData( datagram );
     }
 }

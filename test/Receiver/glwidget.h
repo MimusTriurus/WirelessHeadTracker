@@ -57,6 +57,7 @@
 #include <QOpenGLBuffer>
 #include <QMatrix4x4>
 #include <UdpSocketDataProvider.h>
+#include <QQuaternion>
 #include <Converter.h>
 #include "logo.h"
 
@@ -101,6 +102,9 @@ private:
     int m_xRot;
     int m_yRot;
     int m_zRot;
+
+    QQuaternion _rotation;
+
     QPoint m_lastPos;
     Logo m_logo;
     QOpenGLVertexArrayObject m_vao;

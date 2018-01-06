@@ -261,11 +261,14 @@ void GLWidget::setupVertexAttribs()
 }
 
 void GLWidget::onReceiveData( const QByteArray &data ) {
-    qDebug( ) << "onReceiveData";
-    QQuaternion rot{ Converter::convertFromByteArray<QQuaternion>( data ) };
+    //qDebug( ) << "onReceiveData";
+    _rotation = Converter::convertFromByteArray<QQuaternion>( data );
+    /*
     m_xRot = rot.toEulerAngles( ).x( );
     m_yRot = rot.toEulerAngles( ).y( );
     m_zRot = rot.toEulerAngles( ).z( );
+    this->update( );
+    */
     this->update( );
 }
 
@@ -276,9 +279,12 @@ void GLWidget::paintGL()
     glEnable(GL_CULL_FACE);
 
     m_world.setToIdentity();
+    /*
     m_world.rotate(m_xRot, 1, 0, 0);
     m_world.rotate(m_yRot, 0, 1, 0);
     m_world.rotate(m_zRot, 0, 0, 1);
+    */
+    m_world.rotate( _rotation );
 
     QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
     m_program->bind();
@@ -286,7 +292,6 @@ void GLWidget::paintGL()
     m_program->setUniformValue(m_mvMatrixLoc, m_camera * m_world);
     QMatrix3x3 normalMatrix = m_world.normalMatrix();
     m_program->setUniformValue(m_normalMatrixLoc, normalMatrix);
-    qDebug( ) << "x:" << ( 180.0f -  m_xRot / 16 ) << "y:" << ( m_yRot / 16 ) << "z:" << ( m_zRot / 16 );
 
     glDrawArrays(GL_TRIANGLES, 0, m_logo.vertexCount());
 
