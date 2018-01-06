@@ -1,7 +1,7 @@
 #include "RtimuSensorsGetter.h"
 
 void RtimuSensorsGetter::getSensorsData( ) {
-    /*
+
     if ( !_imuInited ) {
         _imuInited = true;
         if ( !_rtimu->IMUInit( ) )
@@ -19,11 +19,9 @@ void RtimuSensorsGetter::getSensorsData( ) {
     }
     else
         qWarning( "Failed to read intertial measurement data" );
-    */
 }
 
 RtimuSensorsGetter::RtimuSensorsGetter( QObject *parent ) : IOrientationGetter( parent ) {
-    /*
     const QString writableConfigDir = QStandardPaths::writableLocation( QStandardPaths::GenericConfigLocation ) + QStringLiteral( "/sense_hat" );
 
     QByteArray dirName = writableConfigDir.toUtf8( );
@@ -36,15 +34,13 @@ RtimuSensorsGetter::RtimuSensorsGetter( QObject *parent ) : IOrientationGetter( 
      _tmrUpdate.setInterval( 10 );
      connect( &_tmrUpdate, &QTimer::timeout, [ this ] { this->getSensorsData( ); } );
      _tmrUpdate.start( );
-     */
 }
 
 RtimuSensorsGetter::~RtimuSensorsGetter( ) {
-    //delete _settings;
-    //delete _rtimu;
+    delete _settings;
+    delete _rtimu;
 }
-/*
-void HeadTracker::report( const RTIMU_DATA &data ) {
-    emit update( data.gyro.x( ), data.gyro.y( ), data.gyro.z( ), data.accel.x( ), data.accel.y( ), data.accel.z( ) );
+
+void RtimuSensorsGetter::report( const RTIMU_DATA &data ) {
+    emit orientationChanged( data.gyro.x( ), data.gyro.y( ), data.gyro.z( ), data.accel.x( ), data.accel.y( ), data.accel.z( ) );
 }
-*/

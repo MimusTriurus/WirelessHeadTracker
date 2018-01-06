@@ -21,10 +21,14 @@ MainWindow::~MainWindow( ) {
 }
 
 void MainWindow::onGetSensorsData(  float xG, float yG, float zG, float xA, float yA, float zA ) {
+    /*
     qDebug( ) << "xG:" << xG << "yG:" << yG << "zG:" << zG;
     qDebug( ) << "xA:" << xA << "yA:" << yA << "zA:" << zA;
     qDebug( ) << "****************************************";
+    */
     MahonyFilter::MahonyAHRSupdateIMU( xG, yG, zG, xA, yA, zA );
     QQuaternion q( MahonyFilter::q0, MahonyFilter::q1, MahonyFilter::q2, MahonyFilter::q3 );
+    //qDebug( ) << q;
+    //qDebug( ) << "*************************";
     _transmitter.sendFrameData( Converter::convertToByteArray<QQuaternion>( q ) );
 }
