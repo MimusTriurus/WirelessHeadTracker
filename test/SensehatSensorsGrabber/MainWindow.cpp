@@ -3,6 +3,7 @@
 #include <QQuaternion>
 #include <QDebug>
 #include <MahonyAHRS/MahonyAHRS.h>
+#include <AHRS.h>
 
 MainWindow::MainWindow( QWidget *parent ) :
     QMainWindow( parent ),
@@ -27,8 +28,6 @@ void MainWindow::onGetSensorsData(  float xG, float yG, float zG, float xA, floa
     qDebug( ) << "****************************************";
     */
     MahonyFilter::MahonyAHRSupdateIMU( xG, yG, zG, xA, yA, zA );
-    QQuaternion q( MahonyFilter::q0, MahonyFilter::q1, MahonyFilter::q2, MahonyFilter::q3 );
-    //qDebug( ) << q;
-    //qDebug( ) << "*************************";
-    _transmitter.sendFrameData( Converter::convertToByteArray<QQuaternion>( q ) );
+    //QQuaternion q( MahonyFilter::q0, MahonyFilter::q1, MahonyFilter::q2, MahonyFilter::q3 );
+    _transmitter.sendFrameData( Converter::convertToByteArray<QQuaternion>( AHRS::rotation( xG, yG, zG, xA, yA, zA ) ) );
 }

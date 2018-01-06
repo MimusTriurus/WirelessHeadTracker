@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT       += gui
 
 TARGET = AHRS
 TEMPLATE = lib
@@ -26,16 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        AHRS.cpp \
     AHRS.cpp \
     MadgwickAHRS/MadgwickAHRS.c \
     MahonyAHRS/MahonyAHRS.cpp
 
 HEADERS += \
-        AHRS.h \
+    AHRS.h \
     MadgwickAHRS/MadgwickAHRS.h \
-    MahonyAHRS/MahonyAHRS.h \
-    AHRS.h
+    MahonyAHRS/MahonyAHRS.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
