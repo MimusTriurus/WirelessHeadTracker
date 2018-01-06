@@ -9,7 +9,7 @@
 #include <QByteArray>
 
 #include "IOrientationGetter.h"
-//#include "RTIMULib.h"
+#include "RTIMULib.h"
 
 class RtimuSensorsGetter : public IOrientationGetter {
     Q_OBJECT
@@ -21,11 +21,11 @@ private:
     QTimer         _tmrUpdate;
     int            _pollInterval { 0 };
     bool           _imuInited    { false };
-    //RTIMUSettings *_settings     { nullptr };
-    //RTIMU         *_rtimu        { nullptr };
+    RTIMUSettings *_settings     { nullptr };
+    RTIMU         *_rtimu        { nullptr };
 
     void getSensorsData( );
-    //void report( const RTIMU_DATA &data );
+    void report( const RTIMU_DATA &data );
 };
 
 #endif // HEADTRACKER_H
