@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <Converter.h>
 #include <DataTransmitter.h>
-#include <AHRS.h>
 #include <RtimuSensorsGetter.h>
 
 namespace Ui {

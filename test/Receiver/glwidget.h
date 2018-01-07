@@ -61,7 +61,7 @@
 #include <Converter.h>
 #include "logo.h"
 #include <QTimer>
-#include "E:/Projects/Qt/HeadTracker/lib/dynamic/UnityHeadTracker/UnityHeadTracker.h"
+#include <UnityHeadTracker.h>
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 

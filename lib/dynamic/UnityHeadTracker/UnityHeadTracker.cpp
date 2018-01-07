@@ -7,24 +7,24 @@ namespace UnityHeadTracker {
 
 static HeadTracker _headTracker;
 
-float UnityHeadTracker::scalar( ) {
+float scalar( ) {
     return _headTracker.scalar( );
 }
 
-float UnityHeadTracker::x( ) {
+float x( ) {
     return _headTracker.x( );
 }
 
-float UnityHeadTracker::y( ) {
+float y( ) {
     return _headTracker.y( );
 }
 
-float UnityHeadTracker::z( ) {
+float z( ) {
     return _headTracker.z( );
 }
 
 
-void UnityHeadTracker::setSettings( const char *filePath ) {
+void setSettings( const char *filePath ) {
     _headTracker.setSettings( filePath );
     _headTracker.run( );
 }

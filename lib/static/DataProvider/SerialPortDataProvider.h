@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QSerialPortInfo>
-#include <IDataprovider.h>
+#include "IDataProvider.h"
 
 #include <QtXml>
 #include <QtSerialPort/QSerialPort>

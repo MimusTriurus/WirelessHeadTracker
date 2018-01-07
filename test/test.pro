@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 SUBDIRS += \
     Transmitter \
-    Receiver# \
-    #SensehatSensorsGrabber
+    Receiver \
+    SensehatSensorsGrabber
