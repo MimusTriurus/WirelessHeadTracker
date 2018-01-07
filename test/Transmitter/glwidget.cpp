@@ -271,8 +271,8 @@ void GLWidget::paintGL()
     float xRot{ 180.0f - ( m_xRot / 16.0f ) };
     float yRot{ m_yRot / 16.0f };
     float zRot{ m_zRot / 16.0f };
-    _transmitter.sendFrameData(
-                Converter::convertToByteArray<QQuaternion>( QQuaternion::fromEulerAngles( xRot, yRot, zRot ) ) );
+    _transmitter.sendData(
+                Converter::serialize<QQuaternion>( QQuaternion::fromEulerAngles( xRot, yRot, zRot ) ) );
 
     QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
     m_program->bind();

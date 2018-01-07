@@ -74,8 +74,10 @@ GLWidget::GLWidget(QWidget *parent)
         setFormat(fmt);
     }
 
-    connect( &_socket, SIGNAL( getData( QByteArray ) ), this, SLOT( onReceiveData( QByteArray ) ) );
-    _socket.SetSettings( "" );
+    UnityHeadTracker::setSettings( "" );
+    _tmrUpdate.setInterval( 10 );
+    connect( &_tmrUpdate, &QTimer::timeout, [ this ]( ){ this->update( ); } );
+    _tmrUpdate.start( );
 }
 
 GLWidget::~GLWidget()
@@ -260,30 +262,20 @@ void GLWidget::setupVertexAttribs()
     m_logoVbo.release();
 }
 
-void GLWidget::onReceiveData( const QByteArray &data ) {
-    //qDebug( ) << "onReceiveData";
-    _rotation = Converter::convertFromByteArray<QQuaternion>( data );
-    /*
-    m_xRot = rot.toEulerAngles( ).x( );
-    m_yRot = rot.toEulerAngles( ).y( );
-    m_zRot = rot.toEulerAngles( ).z( );
-    this->update( );
-    */
-    this->update( );
-}
-
 void GLWidget::paintGL()
 {
+    //qDebug() << "paint";
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
     m_world.setToIdentity();
-    /*
-    m_world.rotate(m_xRot, 1, 0, 0);
-    m_world.rotate(m_yRot, 0, 1, 0);
-    m_world.rotate(m_zRot, 0, 0, 1);
-    */
+
+    _rotation = QQuaternion( UnityHeadTracker::scalar( ),
+                             UnityHeadTracker::x( ),
+                             UnityHeadTracker::y( ),
+                             UnityHeadTracker::z( ) );
+
     m_world.rotate( _rotation );
 
     QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);

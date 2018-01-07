@@ -11,7 +11,7 @@ public:
     void host( const QString &host );
     void port( const quint16 port );
 public slots:
-    void sendFrameData( const QByteArray &data );
+    void sendData( const QByteArray &data );
 private:
     QUdpSocket      _socket;
     QHostAddress    _host;

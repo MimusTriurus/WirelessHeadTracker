@@ -76,31 +76,33 @@ void SerialPortDataProvider::handleError( QSerialPort::SerialPortError error ) {
     }
 }
 
-void SerialPortDataProvider::SetSettings( const char *settingsDest ) {
+void SerialPortDataProvider::run( ) {
+    if ( !_serialPort.open( QIODevice::ReadOnly ) ) {
+        qDebug( ) << "Error on open:" << _serialPort.portName( ) << " " << _serialPort.errorString( );
+        return;
+    }
+}
+
+void SerialPortDataProvider::setSettings( const char *settingsDest ) {
     QDomDocument domDoc;
     QFile        file( settingsDest );
     if ( file.open( QIODevice::ReadOnly ) ) {
         if ( domDoc.setContent( &file ) ) {
             QDomElement domElement = domDoc.documentElement( );
             getSettings( domElement );
+
+            QSerialPortInfo serialPortInfo( _serialPort.portName( ) );
+
+            qDebug( ) << "*** Serial Port Info ***" ;
+            qDebug( ) << "Name:" << _serialPort.portName( );
+            qDebug( ) << "Speed:" << _serialPort.baudRate( );
+            qDebug( ) << "ProductIdentifier:" << serialPortInfo.productIdentifier( );
+            qDebug( ) << "SerialNumber:" << serialPortInfo.serialNumber( );
+            qDebug( ) << "*************************" ;
+
             file.close();
         }
     }
     else
         qDebug() << "file " << settingsDest << " not found";
-
-    if ( !_serialPort.open( QIODevice::ReadOnly ) ) {
-        qDebug( ) << "Error on open:" << _serialPort.portName( ) << " " << _serialPort.errorString( );
-        return;
-    }
-    else {
-        QSerialPortInfo serialPortInfo( _serialPort.portName( ) );
-
-        qDebug( ) << "*** Serial Port Info ***" ;
-        qDebug( ) << "Name:" << _serialPort.portName( );
-        qDebug( ) << "Speed:" << _serialPort.baudRate( );
-        qDebug( ) << "ProductIdentifier:" << serialPortInfo.productIdentifier( );
-        qDebug( ) << "SerialNumber:" << serialPortInfo.serialNumber( );
-        qDebug( ) << "*************************" ;
-    }
 }

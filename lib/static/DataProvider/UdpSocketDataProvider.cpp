@@ -5,9 +5,12 @@ UdpSocketDataProvider::UdpSocketDataProvider( QObject *parent ) : IDataProvider{
     connect( &_server, &QUdpSocket::readyRead, this, &UdpSocketDataProvider::onReceiveData );
 }
 
-void UdpSocketDataProvider::SetSettings( const char *settingsDest ) {
+void UdpSocketDataProvider::run( ) {
+    _server.bind( QHostAddress::Any, _port );
+}
+
+void UdpSocketDataProvider::setSettings( const char *settingsDest ) {
     Q_UNUSED( settingsDest )
-    _server.bind( QHostAddress::Any, DEFAULT_PORT );
 }
 
 void UdpSocketDataProvider::onReceiveData( ) {

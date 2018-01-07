@@ -29,5 +29,5 @@ void MainWindow::onGetSensorsData(  float xG, float yG, float zG, float xA, floa
     */
     MahonyFilter::MahonyAHRSupdateIMU( xG, yG, zG, xA, yA, zA );
     //QQuaternion q( MahonyFilter::q0, MahonyFilter::q1, MahonyFilter::q2, MahonyFilter::q3 );
-    _transmitter.sendFrameData( Converter::convertToByteArray<QQuaternion>( AHRS::rotation( xG, yG, zG, xA, yA, zA ) ) );
+    _transmitter.sendFrameData( Converter::serialize<QQuaternion>( AHRS::rotation( xG, yG, zG, xA, yA, zA ) ) );
 }

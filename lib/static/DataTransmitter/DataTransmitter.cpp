@@ -18,7 +18,7 @@ void DataTransmitter::port( const quint16 port ) {
     _port = port;
 }
 
-void DataTransmitter::sendFrameData( const QByteArray &data ) {
+void DataTransmitter::sendData( const QByteArray &data ) {
     _socket.writeDatagram( data , _host, _port );
 }
 

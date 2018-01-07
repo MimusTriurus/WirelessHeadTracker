@@ -20,7 +20,8 @@ public:
     * описывает настройки интерфейса получения данных
     * и маску пакета
     */
-    virtual void SetSettings( const char* settingsDest ) = 0;
+    virtual void setSettings( const char* settingsDest ) = 0;
+    virtual void run( ) = 0;
 signals:
     /**
     * @brief событие отправки пакета с данными получателю

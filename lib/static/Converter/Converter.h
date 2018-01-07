@@ -6,7 +6,7 @@
 
 namespace Converter {
     template <typename T>
-    QByteArray convertToByteArray( T value ) {
+    QByteArray serialize( T value ) {
         QByteArray array;
         QDataStream stream( &array, QIODevice::ReadWrite );
         stream << value;
@@ -14,7 +14,7 @@ namespace Converter {
     }
 
     template <typename T>
-    T convertFromByteArray( const QByteArray &bytes ) {
+    T deserialize( const QByteArray &bytes ) {
         T result;
         QDataStream stream( bytes );
         stream >> result;

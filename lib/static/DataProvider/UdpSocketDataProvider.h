@@ -10,11 +10,13 @@ class UdpSocketDataProvider : public IDataProvider {
 public:
     explicit UdpSocketDataProvider( QObject *parent = nullptr );
 public:
-    void SetSettings( const char *settingsDest );
+    void setSettings( const char *settingsDest ) override;
+    void run( ) override;
 private:
-    const int DEFAULT_PORT{ 10001 };
+    const quint16 DEFAULT_PORT{ 10001 };
 
     QUdpSocket _server;
+    quint16 _port{ DEFAULT_PORT };
 private slots:
     void onReceiveData( );
 };

@@ -60,6 +60,8 @@
 #include <QQuaternion>
 #include <Converter.h>
 #include "logo.h"
+#include <QTimer>
+#include "E:/Projects/Qt/HeadTracker/lib/dynamic/UnityHeadTracker/UnityHeadTracker.h"
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 
@@ -119,9 +121,7 @@ private:
     QMatrix4x4 m_world;
     static bool m_transparent;
 
-    UdpSocketDataProvider _socket;
-private slots:
-    void onReceiveData( const QByteArray &data );
+    QTimer _tmrUpdate;
 };
 
 #endif

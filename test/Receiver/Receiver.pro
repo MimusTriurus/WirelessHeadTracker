@@ -30,7 +30,7 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../l
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/Converter/release/Converter.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/Converter/debug/Converter.lib
 else:unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/Converter/libConverter.a
-
+###
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../lib/static/DataProvider/release/ -lDataProvider
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../lib/static/DataProvider/debug/ -lDataProvider
 else:unix:!macx: LIBS += -L$$OUT_PWD/../../lib/static/DataProvider/ -lDataProvider
@@ -43,3 +43,10 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../l
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/DataProvider/release/DataProvider.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/DataProvider/debug/DataProvider.lib
 else:unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../../lib/static/DataProvider/libDataProvider.a
+### UnityHeadTracker ###########################################################
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../lib/dynamic/UnityHeadTracker/release/ -lUnityHeadTracker
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../lib/dynamic/UnityHeadTracker/debug/ -lUnityHeadTracker
+else:unix:!macx: LIBS += -L$$OUT_PWD/../../lib/dynamic/UnityHeadTracker/ -lUnityHeadTracker
+
+INCLUDEPATH += $$PWD/../../lib/dynamic/UnityHeadTracker
+DEPENDPATH += $$PWD/../../lib/dynamic/UnityHeadTracker
