@@ -7,7 +7,7 @@
 
 class UdpSocketDataProvider : public IDataProvider {
 public:
-    void setSettings( const char *settingsDest ) override;
+    void setSettings( const QString &settingsDest ) override;
 
     void start( ) override;
     void stop( ) override;

@@ -3,11 +3,13 @@
 
 #include <QThread>
 #include <IDataProvider.h>
+#include <QMetaEnum>
 
 class HeadTracker : public QThread {
     Q_OBJECT
 public:
     explicit HeadTracker( QObject *parent = nullptr );
+    void dataProviderType( const int type );
 
     float scalar( ) const;
     float x( ) const;
@@ -34,6 +36,18 @@ private:
 
     void log( QString mess );
     void transformToQuaternion( const QByteArray &data );
+
+    enum Type {
+        ViaUdp,
+        ViaSerialPort,
+        ViaQSensors,
+        ViaRtimu,
+        None
+    };
+    Type _dataProviderType{ Type::ViaUdp };
+    IDataProvider *makeDataProvider( );
+
+    Type getType( const int i );
 };
 
 #endif // HEADTRACKER_H

@@ -11,6 +11,7 @@
 
 namespace UnityHeadTracker {
     extern "C" {
+        FUNCTION_EXPORT void setDataProviderType( const int type );
         FUNCTION_EXPORT void setSettings( const char *filePath );
         FUNCTION_EXPORT void start( );
         FUNCTION_EXPORT void stop( );

@@ -19,7 +19,7 @@ public:
     * описывает настройки интерфейса получения данных
     * и маску пакета
     */
-    virtual void setSettings( const char* settingsDest ) = 0;
+    virtual void setSettings( const QString &settingsDest ) = 0;
     virtual bool isDataAvailable( ) = 0;
     virtual QByteArray data( ) = 0;
 public slots:

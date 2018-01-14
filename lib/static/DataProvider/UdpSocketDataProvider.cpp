@@ -21,6 +21,6 @@ QByteArray UdpSocketDataProvider::data( ) {
     return datagram;
 }
 
-void UdpSocketDataProvider::setSettings( const char *settingsDest ) {
+void UdpSocketDataProvider::setSettings( const QString &settingsDest ) {
     Q_UNUSED( settingsDest )
 }

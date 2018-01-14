@@ -39,5 +39,9 @@ void stop( ) {
     _headTracker.work( false );
 }
 
+void setDataProviderType( const int type ) {
+    _headTracker.dataProviderType( type );
+}
+
 }
 
