@@ -7,10 +7,9 @@
  * @brief описание интерфейса получения данных
  * от различных источников COM порт, Ethernet и т.д.
  */
-class IDataProvider : public QObject {
-    Q_OBJECT
+class IDataProvider {
 protected:
-    IDataProvider( QObject *parent = nullptr ) : QObject{ parent } { }
+    IDataProvider( ) { }
 public:
     virtual ~IDataProvider( ){ }
 public:
@@ -21,12 +20,11 @@ public:
     * и маску пакета
     */
     virtual void setSettings( const char* settingsDest ) = 0;
-    virtual void run( ) = 0;
-signals:
-    /**
-    * @brief событие отправки пакета с данными получателю
-    */
-    void getData( const QByteArray & );
+    virtual bool isDataAvailable( ) = 0;
+    virtual QByteArray data( ) = 0;
+public slots:
+    virtual void start( ) = 0;
+    virtual void stop( ) = 0;
 };
 
 #endif // IDATAPROVIDER_H

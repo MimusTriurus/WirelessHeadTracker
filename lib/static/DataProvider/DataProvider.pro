@@ -27,12 +27,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     UdpSocketDataProvider.cpp \
-    SerialPortDataProvider.cpp
+    #SerialPortDataProvider.cpp
 
 HEADERS += \
     IDataProvider.h \
     UdpSocketDataProvider.h \
-    SerialPortDataProvider.h
+    #SerialPortDataProvider.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target

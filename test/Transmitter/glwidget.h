@@ -56,10 +56,11 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 #include <QMatrix4x4>
-#include <DataTransmitter.h>
+#include <QQuaternion>
 #include <Converter.h>
-
+#include <DataTransmitter.h>
 #include "logo.h"
+#include <QTimer>
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 
@@ -102,6 +103,7 @@ private:
     int m_xRot;
     int m_yRot;
     int m_zRot;
+    DataTransmitter _transmitter{ "192.168.1.40", 10001 };
     QPoint m_lastPos;
     Logo m_logo;
     QOpenGLVertexArrayObject m_vao;
@@ -115,8 +117,6 @@ private:
     QMatrix4x4 m_camera;
     QMatrix4x4 m_world;
     static bool m_transparent;
-
-    DataTransmitter _transmitter{ "192.168.1.39", 10001 };
 };
 
 #endif

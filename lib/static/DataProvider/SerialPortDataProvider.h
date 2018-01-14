@@ -23,7 +23,10 @@ class SerialPortDataProvider : public IDataProvider {
         void handleError( QSerialPort::SerialPortError error );
     public:
         void setSettings( const char *settingsDest ) override;
-        void run( ) override;
+        void start( ) override;
+        void stop( ) override;
+        bool isDataAvailable( ) override;
+        QByteArray data( ) override;
     private:
         QSerialPort  _serialPort;
         QTimer       _timer;

@@ -3,7 +3,7 @@ QT       += network
 HEADERS       = glwidget.h \
                 window.h \
                 mainwindow.h \
-                logo.h
+		logo.h
 SOURCES       = glwidget.cpp \
                 main.cpp \
                 window.cpp \

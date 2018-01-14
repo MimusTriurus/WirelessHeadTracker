@@ -5,4 +5,4 @@ SUBDIRS += \
     DataProvider \
     AHRS \
     DataTransmitter \
-    SensorsDataGetter
+    #SensorsDataGetter

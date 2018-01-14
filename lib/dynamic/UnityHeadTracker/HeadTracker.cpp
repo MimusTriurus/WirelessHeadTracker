@@ -8,10 +8,6 @@ HeadTracker::HeadTracker( QObject *parent ) : QThread( parent ) {
     this->log( "Create HeadTracker" );
 }
 
-HeadTracker::~HeadTracker( ) {
-    this->log( "Destroy HeadTracker" );
-}
-
 float HeadTracker::scalar( ) const {
     return _scalar;
 }
@@ -29,17 +25,34 @@ float HeadTracker::z( ) const {
 }
 
 void HeadTracker::setSettings( const char *filePath ) {
-    this->log( "set settings" );
-    this->log( filePath );
+    this->log( "settings file path:" + QString( filePath ) );
+
     _settingsFilePath = filePath;
 }
 
+void HeadTracker::work( bool value ) {
+    _working = value;
+    if ( !this->isRunning( ) )
+        this->start( );
+}
+
+bool HeadTracker::work( ) {
+    return this->isRunning( );
+}
+
 void HeadTracker::run( ) {
-    auto dataProvider = new UdpSocketDataProvider( this );
-    QObject::connect( dataProvider, SIGNAL( getData( QByteArray ) ),
-             this, SLOT( onReceiveData( QByteArray ) ) );
-    dataProvider->setSettings( _settingsFilePath.toUtf8( ) );
-    dataProvider->run( );
+    auto dataProvider = new UdpSocketDataProvider( );
+    dataProvider->start( );
+    this->log( "run thread" );
+    while ( _working ) {
+        if ( dataProvider->isDataAvailable( ) ) {
+            transformToQuaternion( dataProvider->data( ) );
+        }
+        QThread::sleep( _sleepInterval );
+    }
+    dataProvider->stop( );
+    this->log( "stop thread" );
+    delete dataProvider;
 }
 
 void HeadTracker::log( QString mess ) {
@@ -48,7 +61,7 @@ void HeadTracker::log( QString mess ) {
     qDebug( ) << mess;
 }
 
-void HeadTracker::onReceiveData( const QByteArray &data ) {
+void HeadTracker::transformToQuaternion( const QByteArray &data ) {
     auto rotation = Converter::deserialize<QQuaternion>( data );
     _scalar = rotation.scalar( );
     _x = rotation.x( );

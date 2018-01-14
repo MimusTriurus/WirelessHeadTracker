@@ -1,7 +1,6 @@
 #include "UnityHeadTracker.h"
 #include "HeadTracker.h"
-
-#include <QThread>
+#include <QDebug>
 
 namespace UnityHeadTracker {
 
@@ -26,11 +25,18 @@ float z( ) {
 
 void setSettings( const char *filePath ) {
     _headTracker.setSettings( filePath );
-    _headTracker.run( );
 }
 
 void setLogCallback( void ( *func )( const char * ) ) {
     _headTracker.logMessage = func;
+}
+
+void start( ) {
+    _headTracker.work( true );
+}
+
+void stop( ) {
+    _headTracker.work( false );
 }
 
 }

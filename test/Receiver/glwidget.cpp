@@ -75,6 +75,7 @@ GLWidget::GLWidget(QWidget *parent)
     }
 
     UnityHeadTracker::setSettings( "" );
+    UnityHeadTracker::start( );
     _tmrUpdate.setInterval( 10 );
     connect( &_tmrUpdate, &QTimer::timeout, [ this ]( ){ this->update( ); } );
     _tmrUpdate.start( );
@@ -82,6 +83,7 @@ GLWidget::GLWidget(QWidget *parent)
 
 GLWidget::~GLWidget()
 {
+    UnityHeadTracker::stop( );
     cleanup();
 }
 

@@ -63,7 +63,7 @@ void SerialPortDataProvider::handleTimeout( ) {
 
         foreach ( QByteArray bytes, list ) {
             if ( bytes.length( ) != _packetSize ) continue;
-            emit this->getData( bytes );
+            //emit this->getData( bytes );
             //qDebug() << "****";
             //qDebug() << bytes;
         }
@@ -76,11 +76,23 @@ void SerialPortDataProvider::handleError( QSerialPort::SerialPortError error ) {
     }
 }
 
-void SerialPortDataProvider::run( ) {
+void SerialPortDataProvider::start( ) {
     if ( !_serialPort.open( QIODevice::ReadOnly ) ) {
         qDebug( ) << "Error on open:" << _serialPort.portName( ) << " " << _serialPort.errorString( );
         return;
     }
+}
+
+void SerialPortDataProvider::stop( ) {
+
+}
+
+bool SerialPortDataProvider::isDataAvailable( ) {
+    return false;
+}
+
+QByteArray SerialPortDataProvider::data( ) {
+    return nullptr;
 }
 
 void SerialPortDataProvider::setSettings( const char *settingsDest ) {
