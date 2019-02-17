@@ -5,14 +5,14 @@
 #include <UdpSocketDataProvider.h>
 
 HeadTracker::HeadTracker( QObject *parent ) :
+    QThread          { parent },
     _scalar          { 1 },
     _x               { 0 },
     _y               { 0 },
     _z               { 0 },
     _sleepInterval   { 0.1f },
     _working         { false },
-    _settingsFilePath{ QString( ) },
-    QThread          { parent }
+    _settingsFilePath{ QString( ) }
 {
     this->log( "Create HeadTracker" );
 }
@@ -109,9 +109,8 @@ IDataProvider *HeadTracker::makeDataProvider( ) {
 }
 
 HeadTracker::Type HeadTracker::getType( const int i ) {
-    Type t = static_cast<Type>( i );
-    if ( t == nullptr ) {
+    if ( ( i > Type::None ) || ( i < Type::ViaUdp ) )
         return Type::None;
-    }
+    Type t = static_cast<Type>( i );
     return t;
 }

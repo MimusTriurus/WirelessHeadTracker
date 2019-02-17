@@ -26,6 +26,7 @@ MainWindow::MainWindow( QWidget *parent ) :
     QVariant vPort{ parser.value( PORT_ID ) };
     quint16 port = ( vPort.canConvert<quint16>( ) ) ? vPort.value<quint16>( ) : 10001;
     qDebug( ) << "set host:" << host << port;
+    this->setWindowTitle( "Send data to host:" + host + " port:" +QString::number( port ) );
     _transmitter.host( host );
     _transmitter.port( port );
 
