@@ -31,7 +31,7 @@ RtimuSensorsGetter::RtimuSensorsGetter( QObject *parent ) : IOrientationGetter( 
     _pollInterval = qMax( 1, _rtimu->IMUGetPollInterval( ) );
     qDebug( ) << "IMU name " << _rtimu->IMUName( ) << "Recommended poll interval " << _pollInterval << " ms";
 
-     _tmrUpdate.setInterval( 10 );
+     _tmrUpdate.setInterval( _pollInterval );
      connect( &_tmrUpdate, &QTimer::timeout, [ this ] { this->getSensorsData( ); } );
      _tmrUpdate.start( );
 }

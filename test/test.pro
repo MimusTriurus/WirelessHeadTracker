@@ -1,6 +1,5 @@
 TEMPLATE = subdirs
 SUBDIRS += \
     Transmitter \
-    Receiver# \
-    #SensehatSensorsGrabber
-    #TestUnityHeadTrackerLib
+    Receiver \
+    SensehatSensorsGrabber

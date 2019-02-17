@@ -21,5 +21,6 @@ MainWindow::~MainWindow( ) {
 }
 
 void MainWindow::onGetSensorsData(  float xG, float yG, float zG, float xA, float yA, float zA ) {
+    //qDebug( ) << xG << yG << zG << xA << yA << zA;
     _transmitter.sendData( Converter::serialize<QQuaternion>( AHRS::rotation( xG, yG, zG, xA, yA, zA ) ) );
 }
