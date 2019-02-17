@@ -103,7 +103,7 @@ private:
     int m_xRot;
     int m_yRot;
     int m_zRot;
-    DataTransmitter _transmitter{ "192.168.1.40", 10001 };
+    DataTransmitter _transmitter;
     QPoint m_lastPos;
     Logo m_logo;
     QOpenGLVertexArrayObject m_vao;

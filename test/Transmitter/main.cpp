@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Qt Hello GL 2 Example");
     QCoreApplication::setOrganizationName("QtProject");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::applicationName());
     parser.addHelpOption();

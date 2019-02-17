@@ -16,13 +16,12 @@ class RtimuSensorsGetter : public IOrientationGetter {
 public:
     RtimuSensorsGetter( QObject *parent = nullptr );
     ~RtimuSensorsGetter( );
-signals:
 private:
-    QTimer         _tmrUpdate;
-    int            _pollInterval { 0 };
-    bool           _imuInited    { false };
-    RTIMUSettings *_settings     { nullptr };
-    RTIMU         *_rtimu        { nullptr };
+    QTimer        _tmrUpdate;
+    int           _pollInterval;
+    bool          _imuInited;
+    RTIMUSettings *_settings;
+    RTIMU         *_rtimu;
 
     void getSensorsData( );
     void report( const RTIMU_DATA &data );

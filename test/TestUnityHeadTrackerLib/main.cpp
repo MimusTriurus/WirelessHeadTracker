@@ -19,5 +19,5 @@ int main( int argc, char *argv[ ] ) {
     } );
     _tmr.start( );
 
-    return a.exec();
+    return a.exec( );
 }

@@ -56,6 +56,10 @@
 #include <QQuaternion>
 #include <math.h>
 
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QVariant>
+
 bool GLWidget::m_transparent = false;
 
 GLWidget::GLWidget(QWidget *parent)
@@ -73,6 +77,22 @@ GLWidget::GLWidget(QWidget *parent)
         fmt.setAlphaBufferSize(8);
         setFormat(fmt);
     }
+    // читаем настройки из командной строки
+    QCommandLineParser parser;
+    parser.addHelpOption( );
+    const QString HOST_ID{ "host" };
+    const QString PORT_ID{ "port" };
+    QCommandLineOption hostOption( HOST_ID, "Data receiver host", "127.0.0.1", "127.0.0.1" );
+    parser.addOption( hostOption );
+    QCommandLineOption portOption( PORT_ID, "Data receiver port", "10001", "10001" );
+    parser.addOption( portOption );
+    parser.process( qApp->arguments( ) );
+    QString  host { parser.value( HOST_ID ) };
+    QVariant vPort{ parser.value( PORT_ID ) };
+    quint16 port = ( vPort.canConvert<quint16>( ) ) ? vPort.value<quint16>( ) : 10001;
+    qDebug( ) << "set host:" << host << port;
+    _transmitter.host( host );
+    _transmitter.port( port );
 }
 
 GLWidget::~GLWidget()

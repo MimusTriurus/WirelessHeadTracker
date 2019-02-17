@@ -15,11 +15,10 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow( QWidget *parent = nullptr );
     ~MainWindow( );
-
 private:
     Ui::MainWindow *ui;
     RtimuSensorsGetter _getter;
-    DataTransmitter _transmitter{ "192.168.1.33", 10001 };
+    DataTransmitter _transmitter;
 private slots:
     void onGetSensorsData( float xG, float yG, float zG, float xA, float yA, float zA );
 };

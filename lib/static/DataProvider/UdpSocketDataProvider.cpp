@@ -9,7 +9,7 @@ void UdpSocketDataProvider::stop( ) {
     _server.close( );
 }
 
-bool UdpSocketDataProvider::isDataAvailable( ) {
+bool UdpSocketDataProvider::isDataAvailable( ) const {
     return _server.hasPendingDatagrams( );
 }
 
@@ -21,6 +21,13 @@ QByteArray UdpSocketDataProvider::data( ) {
     return datagram;
 }
 
-void UdpSocketDataProvider::setSettings( const char *settingsDest ) {
+UdpSocketDataProvider::UdpSocketDataProvider( ) :
+    DEFAULT_PORT{ 10001 },
+    _port{ DEFAULT_PORT }
+{
+
+}
+
+void UdpSocketDataProvider::setSettings( const QString &settingsDest ) {
     Q_UNUSED( settingsDest )
 }
