@@ -1,7 +1,6 @@
 #include "RtimuSensorsGetter.h"
 
 void RtimuSensorsGetter::getSensorsData( ) {
-
     if ( !_imuInited ) {
         _imuInited = true;
         if ( !_rtimu->IMUInit( ) )
@@ -21,7 +20,13 @@ void RtimuSensorsGetter::getSensorsData( ) {
         qWarning( "Failed to read intertial measurement data" );
 }
 
-RtimuSensorsGetter::RtimuSensorsGetter( QObject *parent ) : IOrientationGetter( parent ) {
+RtimuSensorsGetter::RtimuSensorsGetter( QObject *parent ) :
+    IOrientationGetter  { parent },
+    _pollInterval       { 0 },
+    _imuInited          { false },
+    _settings           { nullptr },
+    _rtimu              { nullptr }
+{
     const QString writableConfigDir = QStandardPaths::writableLocation( QStandardPaths::GenericConfigLocation ) + QStringLiteral( "/sense_hat" );
 
     QByteArray dirName = writableConfigDir.toUtf8( );

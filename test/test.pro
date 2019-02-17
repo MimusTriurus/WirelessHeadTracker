@@ -1,6 +1,10 @@
 TEMPLATE = subdirs
 SUBDIRS += \
     Transmitter \
-    Receiver# \
-    #SensehatSensorsGrabber
-    #TestUnityHeadTrackerLib
+    Receiver \
+    TestUnityHeadTrackerLib
+
+equals(QT_ARCH, arm) {
+SUBDIRS += \
+    SensehatSensorsGrabber
+}

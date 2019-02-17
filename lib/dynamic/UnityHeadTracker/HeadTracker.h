@@ -24,13 +24,13 @@ public:
 protected:
     void run( ) override;
 private:
-    float _scalar{ 1 };
-    float _x{ 0 };
-    float _y{ 0 };
-    float _z{ 0 };
+    float _scalar;
+    float _x;
+    float _y;
+    float _z;
 
-    float _sleepInterval{ 0.1f };
-    float _working{ false };
+    float _sleepInterval;
+    float _working;
 
     QString _settingsFilePath;
 

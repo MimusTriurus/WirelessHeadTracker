@@ -22,7 +22,6 @@ float z( ) {
     return _headTracker.z( );
 }
 
-
 void setSettings( const char *filePath ) {
     _headTracker.setSettings( filePath );
 }

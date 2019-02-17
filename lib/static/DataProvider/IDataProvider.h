@@ -8,11 +8,8 @@
  * от различных источников COM порт, Ethernet и т.д.
  */
 class IDataProvider {
-protected:
-    IDataProvider( ) { }
 public:
     virtual ~IDataProvider( ){ }
-public:
     /**
     * @brief устанавливаем файл настроек
     * @param settingsDest - путь до файла настроек
@@ -20,9 +17,8 @@ public:
     * и маску пакета
     */
     virtual void setSettings( const QString &settingsDest ) = 0;
-    virtual bool isDataAvailable( ) = 0;
+    virtual bool isDataAvailable( ) const = 0;
     virtual QByteArray data( ) = 0;
-public slots:
     virtual void start( ) = 0;
     virtual void stop( ) = 0;
 };

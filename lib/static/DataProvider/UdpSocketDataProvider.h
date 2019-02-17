@@ -7,17 +7,19 @@
 
 class UdpSocketDataProvider : public IDataProvider {
 public:
+    UdpSocketDataProvider( );
+
     void setSettings( const QString &settingsDest ) override;
 
     void start( ) override;
     void stop( ) override;
 
-    bool isDataAvailable( ) override;
+    bool isDataAvailable( ) const override;
     QByteArray data( ) override;
 private:
-    const quint16 DEFAULT_PORT{ 10001 };
+    const quint16 DEFAULT_PORT;
+    quint16 _port;
     QUdpSocket _server;
-    quint16 _port{ DEFAULT_PORT };
 };
 
 #endif // UDPSOCKETDATAPROVIDER_H

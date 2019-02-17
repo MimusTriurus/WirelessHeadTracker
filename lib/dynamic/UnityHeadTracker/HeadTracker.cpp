@@ -4,9 +4,17 @@
 #include <Converter.h>
 #include <UdpSocketDataProvider.h>
 
-HeadTracker::HeadTracker( QObject *parent ) : QThread( parent ) {
+HeadTracker::HeadTracker( QObject *parent ) :
+    _scalar          { 1 },
+    _x               { 0 },
+    _y               { 0 },
+    _z               { 0 },
+    _sleepInterval   { 0.1f },
+    _working         { false },
+    _settingsFilePath{ QString( ) },
+    QThread          { parent }
+{
     this->log( "Create HeadTracker" );
-
 }
 
 void HeadTracker::dataProviderType( const int type ) {

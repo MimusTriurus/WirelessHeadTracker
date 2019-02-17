@@ -4,5 +4,9 @@ SUBDIRS += \
     Converter \
     DataProvider \
     AHRS \
-    DataTransmitter \
-    #SensorsDataGetter
+    DataTransmitter
+equals(QT_ARCH, arm) {
+    message("raspbian")
+SUBDIRS += \
+    SensorsDataGetter
+}
